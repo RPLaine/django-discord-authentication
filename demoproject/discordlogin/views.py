@@ -1,3 +1,5 @@
 from django.shortcuts import render
+from django.http import HttpRequest, HttpResponse, JsonResponse
 
-# Create your views here.
+def index(request: HttpRequest) -> HttpResponse:
+    return JsonResponse({'message': 'Hello, world!'})
