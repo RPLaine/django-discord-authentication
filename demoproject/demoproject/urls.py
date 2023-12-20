@@ -19,7 +19,7 @@ from django.urls import path, include
 from django.shortcuts import redirect
 
 urlpatterns = [
-    path('', lambda req: redirect("oauth2/discord/")),
+    path('', lambda req: redirect("oauth2/mpassid/")),
     path('admin/', admin.site.urls),
     path('oauth2/discord/', include('discordlogin.urls')),
     path('oauth2/mpassid/', include('mpassidlogin.urls')),

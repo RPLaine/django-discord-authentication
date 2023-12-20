@@ -3,7 +3,7 @@ from django.http import HttpRequest, HttpResponse, JsonResponse
 from django.shortcuts import redirect
 import requests
 
-auth_url_discord = "https://discord.com/api/oauth2/authorize?client_id=1181190931827916852&response_type=code&redirect_uri=http%3A%2F%2Flocalhost%3A8000%2Foauth2%2Flogin%2Fredirect&scope=identify"
+auth_url_discord = "https://discord.com/api/oauth2/authorize?client_id=1181190931827916852&response_type=code&redirect_uri=http%3A%2F%2Flocalhost%3A8000%2Foauth2%2Fdiscord%2Flogin%2Fredirect&scope=identify"
 
 def discord_login(request: HttpRequest):
     return redirect(auth_url_discord)
@@ -30,7 +30,7 @@ def exchange_code(code: str):
         'client_secret': client_secret, #This should be stored in an environment variable in production
         'grant_type': 'authorization_code',
         'code': code,
-        'redirect_uri': 'http://localhost:8000/oauth2/login/redirect', #In production, this should be changed to the actual domain
+        'redirect_uri': 'http://localhost:8000/oauth2/discord/login/redirect', #In production, this should be changed to the actual domain
         'scope': 'identify'
     }
     headers = {
