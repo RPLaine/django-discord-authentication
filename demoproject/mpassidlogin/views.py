@@ -1,11 +1,13 @@
 from django.http import HttpRequest, JsonResponse
 from django.shortcuts import redirect
 import requests
+from django.shortcuts import render
 
 auth_url_mpassid = "https://mpass-proxy-test.csc.fi/idp/profile/oidc/authorize?client_id=spa&response_type=code&redirect_uri=http%3A%2F%2Flocalhost%3A8000%2Foauth2%2Fmpassid%2Flogin%2Fredirect&scope=openid"
 
+
 def mpassid_login(request: HttpRequest):
-    return redirect(auth_url_mpassid)
+    return render(request, 'mpassidlogin/index.html')
 
 def mpassid_login_redirect(request: HttpRequest):
     if request.GET.get('code'):
