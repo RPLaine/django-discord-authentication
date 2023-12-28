@@ -1,12 +1,12 @@
 from django.shortcuts import render
-from django.http import HttpRequest, HttpResponse, JsonResponse
-from django.shortcuts import redirect
+from django.http import HttpRequest, JsonResponse
 import requests
 
 auth_url_discord = "https://discord.com/api/oauth2/authorize?client_id=1181190931827916852&response_type=code&redirect_uri=http%3A%2F%2Flocalhost%3A8000%2Foauth2%2Fdiscord%2Flogin%2Fredirect&scope=identify"
 
+
 def discord_login(request: HttpRequest):
-    return redirect(auth_url_discord)
+    return render(request, 'discordlogin/index.html')
 
 def discord_login_redirect(request: HttpRequest):
     if request.GET.get('code'):
