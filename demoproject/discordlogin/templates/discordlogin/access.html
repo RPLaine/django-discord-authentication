@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Access</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+</head>
+<body>
+    <div class="container">
+        <div class="row my-5">
+            <div class="col-12">
+                <h1>Access</h1>
+            </div>
+            <div class="col-12">
+                <h2>{{database_message}}</h2>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12">
+                <div class="table-responsive">
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr class="table-primary">
+                                <th scope="col">Discord Id</th>
+                                <th scope="col">username</th>
+                                <th scope="col">avatar</th>
+                                <th scope="col">discriminator</th>
+                                <th scope="col">public_flags</th>
+                                <th scope="col">premium_type</th>
+                                <th scope="col">flags</th>
+                                <th scope="col">banner</th>
+                                <th scope="col">accent_color</th>
+                                <th scope="col">global_name</th>
+                                <th scope="col">avatar_decoration_data</th>
+                                <th scope="col">banner_color</th>
+                                <th scope="col">mfa_enabled</th>
+                                <th scope="col">locale</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>{{user.id}}</td>
+                                <td>{{user.username}}</td>
+                                <td>{{user.avatar}}</td>
+                                <td>{{user.discriminator}}</td>
+                                <td>{{user.public_flags}}</td>
+                                <td>{{user.premium_type}}</td>
+                                <td>{{user.flags}}</td>
+                                <td>{{user.banner}}</td>
+                                <td>{{user.accent_color}}</td>
+                                <td>{{user.global_name}}</td>
+                                <td>{{user.avatar_decoration_data}}</td>
+                                <td>{{user.banner_color}}</td>
+                                <td>{{user.mfa_enabled}}</td>
+                                <td>{{user.locale}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from django.http import HttpRequest, JsonResponse
 import requests
+from .models import UserData
 
 auth_url_discord = "https://discord.com/api/oauth2/authorize?client_id=1181190931827916852&response_type=code&redirect_uri=http%3A%2F%2Flocalhost%3A8000%2Foauth2%2Fdiscord%2Flogin%2Fredirect&scope=identify"
 
@@ -16,10 +17,7 @@ def discord_login_redirect(request: HttpRequest):
 
     user = exchange_code(code)
 
-    return JsonResponse({
-        'user': user,
-        'code': code
-        })
+    return access(request, user)
 
 client_id = '1181190931827916852'
 client_secret = 'cAb_hMZHAzu5WTv2OlIMIk9LHHeVZaLg'
@@ -41,4 +39,33 @@ def exchange_code(code: str):
     access_token = credentials['access_token']
     response = requests.get('https://discord.com/api/users/@me', headers={'Authorization': f'Bearer {access_token}'})
     user = response.json()
+
     return user
+
+def access(request: HttpRequest, user: dict):
+    context = {}
+
+    user_data = UserData.objects.filter(discord_id=user['id'])
+    if user_data.exists():
+        context["database_message"] = "User found in UserData table!"
+    else:
+        context["database_message"] = "User not found in UserData table. Creating a new entry."
+        UserData.objects.create(
+            discord_id = user['id'],
+            username = user['username'],
+            avatar = user['avatar'],
+            discriminator = user['discriminator'],
+            public_flags = user['public_flags'],
+            premium_type = user['premium_type'],
+            flags = user['flags'],
+            banner = user['banner'],
+            accent_color = user['accent_color'],
+            global_name = user['locale'],
+            avatar_decoration_data = user['avatar_decoration_data'],
+            banner_color = user['banner_color'],
+            mfa_enabled = user['mfa_enabled'],
+            locale = user['locale']
+        )
+
+    context["user"] = user
+    return render(request, 'discordlogin/access.html', context)
