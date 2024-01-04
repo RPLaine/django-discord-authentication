@@ -1,5 +1,9 @@
 from django.db import models
 
+class OldUserData(models.Model):
+    id = models.AutoField(primary_key=True)
+    username = models.CharField(max_length=255)
+
 class UserData(models.Model):
     id = models.AutoField(primary_key=True)
     discord_id = models.CharField(max_length=255)
@@ -16,8 +20,4 @@ class UserData(models.Model):
     banner_color = models.CharField(max_length=255, blank=True, null=True)
     mfa_enabled = models.BooleanField()
     locale = models.CharField(max_length=255)
-    nmid = models.CharField(max_length=255, blank=True, null=True)
-
-    class OldUserData(models.Model):
-        id = models.AutoField(primary_key=True)
-        username = models.CharField(max_length=255)
+    nmid = models.ForeignKey(OldUserData, on_delete=models.CASCADE, to_field='id', blank=True, null=True)

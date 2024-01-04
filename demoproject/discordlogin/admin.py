@@ -2,5 +2,5 @@ from django.contrib import admin
 from .models import *
 
 # Register your models here.
+admin.site.register(OldUserData)
 admin.site.register(UserData)
-admin.site.register(UserData.OldUserData)
