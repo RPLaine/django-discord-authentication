@@ -21,6 +21,6 @@ from django.shortcuts import redirect
 urlpatterns = [
     path('', lambda req: redirect("oauth2/mpassid/")),
     path('admin/', admin.site.urls),
-    path('oauth2/discord/', include('discordlogin.urls')),
-    path('oauth2/mpassid/', include('mpassidlogin.urls')),
+    path('oauth2/discord/', include(('discordlogin.urls', 'discord'), namespace='discord')),
+    path('oauth2/mpassid/', include(('mpassidlogin.urls', 'mpassid'), namespace='mpassid')),
 ]

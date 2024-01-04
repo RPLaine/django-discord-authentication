@@ -18,46 +18,67 @@
         </div>
         <div class="row">
             <div class="col-12">
-                <div class="table-responsive">
-                    <table class="table table-bordered">
-                        <thead>
-                            <tr class="table-primary">
-                                <th scope="col">Discord Id</th>
-                                <th scope="col">username</th>
-                                <th scope="col">avatar</th>
-                                <th scope="col">discriminator</th>
-                                <th scope="col">public_flags</th>
-                                <th scope="col">premium_type</th>
-                                <th scope="col">flags</th>
-                                <th scope="col">banner</th>
-                                <th scope="col">accent_color</th>
-                                <th scope="col">global_name</th>
-                                <th scope="col">avatar_decoration_data</th>
-                                <th scope="col">banner_color</th>
-                                <th scope="col">mfa_enabled</th>
-                                <th scope="col">locale</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>{{user.id}}</td>
-                                <td>{{user.username}}</td>
-                                <td>{{user.avatar}}</td>
-                                <td>{{user.discriminator}}</td>
-                                <td>{{user.public_flags}}</td>
-                                <td>{{user.premium_type}}</td>
-                                <td>{{user.flags}}</td>
-                                <td>{{user.banner}}</td>
-                                <td>{{user.accent_color}}</td>
-                                <td>{{user.global_name}}</td>
-                                <td>{{user.avatar_decoration_data}}</td>
-                                <td>{{user.banner_color}}</td>
-                                <td>{{user.mfa_enabled}}</td>
-                                <td>{{user.locale}}</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
+                <form method="POST" action="{% url 'discord:access' %}">
+                    {% csrf_token %}
+                    <div class="mb-3">
+                        <label for="discord_id" class="form-label">Discord ID</label>
+                        <input type="text" class="form-control" id="discord_id" name="discord_id" value="{{user.id}}">
+                    </div>
+                    <div class="mb-3">
+                        <label for="username" class="form-label">Username</label>
+                        <input type="text" class="form-control" id="username" name="username" value="{{user.username}}">
+                    </div>
+                    <div class="mb-3">
+                        <label for="avatar" class="form-label">Avatar</label>
+                        <input type="text" class="form-control" id="avatar" name="avatar" value="{{user.avatar}}">
+                    </div>
+                    <div class="mb-3">
+                        <label for="discriminator" class="form-label">Discriminator</label>
+                        <input type="text" class="form-control" id="discriminator" name="discriminator" value="{{user.discriminator}}">
+                    </div>
+                    <div class="mb-3">
+                        <label for="public_flags" class="form-label">Public Flags</label>
+                        <input type="text" class="form-control" id="public_flags" name="public_flags" value="{{user.public_flags}}">
+                    </div>
+                    <div class="mb-3">
+                        <label for="premium_type" class="form-label">Premium Type</label>
+                        <input type="text" class="form-control" id="premium_type" name="premium_type" value="{{user.premium_type}}">
+                    </div>
+                    <div class="mb-3">
+                        <label for="flags" class="form-label">Flags</label>
+                        <input type="text" class="form-control" id="flags" name="flags" value="{{user.flags}}">
+                    </div>
+                    <div class="mb-3">
+                        <label for="banner" class="form-label">Banner</label>
+                        <input type="text" class="form-control" id="banner" name="banner" value="{{user.banner}}">
+                    </div>
+                    <div class="mb-3">
+                        <label for="accent_color" class="form-label">Accent Color</label>
+                        <input type="text" class="form-control" id="accent_color" name="accent_color" value="{{user.accent_color}}">
+                    </div>
+                    <div class="mb-3">
+                        <label for="global_name" class="form-label">Global Name</label>
+                        <input type="text" class="form-control" id="global_name" name="global_name" value="{{user.global_name}}">
+                    </div>
+                    <div class="mb-3">
+                        <label for="avatar_decoration_data" class="form-label">Avatar Decoration Data</label>
+                        <input type="text" class="form-control" id="avatar_decoration_data" name="avatar_decoration_data" value="{{user.avatar_decoration_data}}">
+                    </div>
+                    <div class="mb-3">
+                        <label for="banner_color" class="form-label">Banner Color</label>
+                        <input type="text" class="form-control" id="banner_color" name="banner_color" value="{{user.banner_color}}">
+                    </div>
+                    <div class="mb-3">
+                        <label for="mfa_enabled" class="form-label">MFA Enabled</label>
+                        <input type="text" class="form-control" id="mfa_enabled" name="mfa_enabled" value="{{user.mfa_enabled}}">
+                    </div>
+                    <div class="mb-3">
+                        <label for="locale" class="form-label">Locale</label>
+                        <input type="text" class="form-control" id="locale" name="locale" value="{{user.locale}}">
+                    </div>
+                    
+                    <button type="submit" class="btn btn-primary">Update</button>
+                </form>
             </div>
         </div>
     </div>
