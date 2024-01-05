@@ -20,62 +20,81 @@
             <div class="col-12">
                 <form method="POST" action="{% url 'discord:access' %}">
                     {% csrf_token %}
-                    <div class="mb-3">
-                        <label for="discord_id" class="form-label">Discord ID</label>
-                        <input type="text" class="form-control" id="discord_id" name="discord_id" value="{{user.id}}">
-                    </div>
-                    <div class="mb-3">
-                        <label for="username" class="form-label">Username</label>
-                        <input type="text" class="form-control" id="username" name="username" value="{{user.username}}">
-                    </div>
-                    <div class="mb-3">
-                        <label for="avatar" class="form-label">Avatar</label>
-                        <input type="text" class="form-control" id="avatar" name="avatar" value="{{user.avatar}}">
-                    </div>
-                    <div class="mb-3">
-                        <label for="discriminator" class="form-label">Discriminator</label>
-                        <input type="text" class="form-control" id="discriminator" name="discriminator" value="{{user.discriminator}}">
-                    </div>
-                    <div class="mb-3">
-                        <label for="public_flags" class="form-label">Public Flags</label>
-                        <input type="text" class="form-control" id="public_flags" name="public_flags" value="{{user.public_flags}}">
-                    </div>
-                    <div class="mb-3">
-                        <label for="premium_type" class="form-label">Premium Type</label>
-                        <input type="text" class="form-control" id="premium_type" name="premium_type" value="{{user.premium_type}}">
-                    </div>
-                    <div class="mb-3">
-                        <label for="flags" class="form-label">Flags</label>
-                        <input type="text" class="form-control" id="flags" name="flags" value="{{user.flags}}">
-                    </div>
-                    <div class="mb-3">
-                        <label for="banner" class="form-label">Banner</label>
-                        <input type="text" class="form-control" id="banner" name="banner" value="{{user.banner}}">
-                    </div>
-                    <div class="mb-3">
-                        <label for="accent_color" class="form-label">Accent Color</label>
-                        <input type="text" class="form-control" id="accent_color" name="accent_color" value="{{user.accent_color}}">
-                    </div>
-                    <div class="mb-3">
-                        <label for="global_name" class="form-label">Global Name</label>
-                        <input type="text" class="form-control" id="global_name" name="global_name" value="{{user.global_name}}">
-                    </div>
-                    <div class="mb-3">
-                        <label for="avatar_decoration_data" class="form-label">Avatar Decoration Data</label>
-                        <input type="text" class="form-control" id="avatar_decoration_data" name="avatar_decoration_data" value="{{user.avatar_decoration_data}}">
-                    </div>
-                    <div class="mb-3">
-                        <label for="banner_color" class="form-label">Banner Color</label>
-                        <input type="text" class="form-control" id="banner_color" name="banner_color" value="{{user.banner_color}}">
-                    </div>
-                    <div class="mb-3">
-                        <label for="mfa_enabled" class="form-label">MFA Enabled</label>
-                        <input type="text" class="form-control" id="mfa_enabled" name="mfa_enabled" value="{{user.mfa_enabled}}">
-                    </div>
-                    <div class="mb-5">
-                        <label for="locale" class="form-label">Locale</label>
-                        <input type="text" class="form-control" id="locale" name="locale" value="{{user.locale}}">
-                    </div>
+                    <!-- add nmid to the form -->
+                    <fieldset>
+                        <div class="mb-3">
+                            <h3>NMID User Key</h3>
+                        </div>
+                        <div class="mb-3">
+                            <label for="nmid_user_key" class="form-label">NMID User Key</label>
+                            <!-- Make it possible to insert a secret key that searches NMID table for a user and defines a foreign key if user is found -->
+                            <input type="text" class="form-control" id="nmid_user_key" name="nmid_user_key" value="{{nmid_user_key}}">
+                        </div>
+                        <div class="mb-3">
+                            <button type="submit" class="btn btn-primary" value="link">Link</button>
+                        </div>
+                    </fieldset>
+                    <fieldset disabled>
+                        <div class="mb-3">
+                            <h3>Discord User Data</h3>
+                        </div>
+                        <div class="mb-3">
+                            <label for="discord_id" class="form-label">Discord ID</label>
+                            <input type="text" class="form-control" id="discord_id" name="discord_id" value="{{user.discord_id}}">
+                        </div>
+                        <div class="mb-3">
+                            <label for="username" class="form-label">Username</label>
+                            <input type="text" class="form-control" id="username" name="username" value="{{user.username}}">
+                        </div>
+                        <div class="mb-3">
+                            <label for="avatar" class="form-label">Avatar</label>
+                            <input type="text" class="form-control" id="avatar" name="avatar" value="{{user.avatar}}">
+                        </div>
+                        <div class="mb-3">
+                            <label for="discriminator" class="form-label">Discriminator</label>
+                            <input type="text" class="form-control" id="discriminator" name="discriminator" value="{{user.discriminator}}">
+                        </div>
+                        <div class="mb-3">
+                            <label for="public_flags" class="form-label">Public Flags</label>
+                            <input type="text" class="form-control" id="public_flags" name="public_flags" value="{{user.public_flags}}">
+                        </div>
+                        <div class="mb-3">
+                            <label for="premium_type" class="form-label">Premium Type</label>
+                            <input type="text" class="form-control" id="premium_type" name="premium_type" value="{{user.premium_type}}">
+                        </div>
+                        <div class="mb-3">
+                            <label for="flags" class="form-label">Flags</label>
+                            <input type="text" class="form-control" id="flags" name="flags" value="{{user.flags}}">
+                        </div>
+                        <div class="mb-3">
+                            <label for="banner" class="form-label">Banner</label>
+                            <input type="text" class="form-control" id="banner" name="banner" value="{{user.banner}}">
+                        </div>
+                        <div class="mb-3">
+                            <label for="accent_color" class="form-label">Accent Color</label>
+                            <input type="text" class="form-control" id="accent_color" name="accent_color" value="{{user.accent_color}}">
+                        </div>
+                        <div class="mb-3">
+                            <label for="global_name" class="form-label">Global Name</label>
+                            <input type="text" class="form-control" id="global_name" name="global_name" value="{{user.global_name}}">
+                        </div>
+                        <div class="mb-3">
+                            <label for="avatar_decoration_data" class="form-label">Avatar Decoration Data</label>
+                            <input type="text" class="form-control" id="avatar_decoration_data" name="avatar_decoration_data" value="{{user.avatar_decoration_data}}">
+                        </div>
+                        <div class="mb-3">
+                            <label for="banner_color" class="form-label">Banner Color</label>
+                            <input type="text" class="form-control" id="banner_color" name="banner_color" value="{{user.banner_color}}">
+                        </div>
+                        <div class="mb-3">
+                            <label for="mfa_enabled" class="form-label">MFA Enabled</label>
+                            <input type="text" class="form-control" id="mfa_enabled" name="mfa_enabled" value="{{user.mfa_enabled}}">
+                        </div>
+                        <div class="mb-5">
+                            <label for="locale" class="form-label">Locale</label>
+                            <input type="text" class="form-control" id="locale" name="locale" value="{{user.locale}}">
+                        </div>
+                    </fieldset>
                     <!-- <button type="submit" class="btn btn-primary">Update</button> -->
                 </form>
             </div>

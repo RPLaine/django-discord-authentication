@@ -1,7 +1,9 @@
 from django.shortcuts import render
 from django.http import HttpRequest, JsonResponse
 import requests
-from .models import UserData
+from .models import *
+from django.core import serializers
+import json
 
 auth_url_discord = "https://discord.com/api/oauth2/authorize?client_id=1181190931827916852&response_type=code&redirect_uri=http%3A%2F%2Flocalhost%3A8000%2Foauth2%2Fdiscord%2Flogin%2Fredirect&scope=identify"
 
@@ -45,11 +47,14 @@ def exchange_code(code: str):
 def access(request: HttpRequest, user: dict):
     context = {}
 
+    # Test if the user exists in the database
     user_data = UserData.objects.filter(discord_id=user['id'])
     if user_data.exists():
         context["database_message"] = "User found in UserData table!"
     else:
         context["database_message"] = "User not found in UserData table. Creating a new entry."
+
+        #If the user does not exist in the database, create a new entry
         UserData.objects.create(
             discord_id = user['id'],
             username = user['username'],
@@ -66,6 +71,14 @@ def access(request: HttpRequest, user: dict):
             mfa_enabled = user['mfa_enabled'],
             locale = user['locale']
         )
+        user_data = UserData.objects.filter(discord_id=user['id'])
 
-    context["user"] = user
+    #Transforms the user_data object into a JSON object and then into a Python dictionary
+    user_data_json = serializers.serialize('json', user_data)
+    user_data_json = json.loads(user_data_json)
+    fields_dict = user_data_json[0]['fields']
+
+    context["user"] = fields_dict
+    print(context["user"])
+    
     return render(request, 'discordlogin/access.html', context)
