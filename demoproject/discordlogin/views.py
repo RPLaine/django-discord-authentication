@@ -79,6 +79,11 @@ def access(request: HttpRequest, user: dict):
     fields_dict = user_data_json[0]['fields']
 
     context["user"] = fields_dict
-    print(context["user"])
+
+    #Check if the user has a nmid
+    if fields_dict['nmid'] is None:
+        context["nmid_message"] = "No nmid found in database."
+    else:
+        context["nmid_message"] = "nmid found in database."
     
     return render(request, 'discordlogin/access.html', context)
